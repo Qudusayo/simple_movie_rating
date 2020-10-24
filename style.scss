@@ -3,3 +3,8 @@ $font2: 'Balsamiq Sans', cursive;
 *{
     font-family: $font2;
 }
+
+
+table tbody{
+    transition: height 40s linear ;
+}

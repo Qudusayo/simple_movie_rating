@@ -1,5 +1,5 @@
 // Components
-const addMovie = document.querySelector("#addMovie");
+const addMovie = document.querySelector("#form");
 
 const title = document.querySelector("#title");
 const rating = document.querySelector("#rating");
@@ -34,7 +34,7 @@ function removeId(id){
 }
 
 // EventListeners
-addMovie.addEventListener("click", (e) => {
+addMovie.addEventListener("submit", (e) => {
     e.preventDefault();
     x++
 
