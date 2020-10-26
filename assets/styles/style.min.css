@@ -1,0 +1,45 @@
+*{font-family:"Balsamiq Sans",cursive}table tbody{-webkit-transition:height 40s linear;transition:height 40s linear}
+
+/* ============ media queries for differents device screen ============ */
+@media screen and (max-width: 299px) and (min-width: 200px) {
+  div div > h1.header{
+    font-size: 1.3em;
+  }
+  div div > form > div.form-row{
+    display: grid;
+    grid-template-columns: 100%;
+    row-gap: 10px;
+  }
+  div div > form > div.form-row > div.btn-holder{
+    display: grid;
+    grid-template-columns: 50% 40%;
+    column-gap: 20px;
+  }
+  div div > form > div.form-row > div.btn-holder > button {
+    font-size: 0.7em !important;
+  }
+  div.table-container{
+    overflow-x: scroll;
+  }
+  input{
+    padding: 20px !important;
+  }
+}
+@media screen and (max-width: 800px) and (min-width: 300px) {
+  div div > form > div.form-row{
+    display: grid;
+    grid-template-columns: 100%;
+    row-gap: 15px;
+  }
+  div div > form > div.form-row > div.btn-holder{
+    display: grid;
+    grid-template-columns: 50% 40%;
+    column-gap: 30px;
+  }
+  div.table-container{
+    overflow-x: scroll;
+  }
+  input{
+    padding: 20px !important;
+  }
+}
