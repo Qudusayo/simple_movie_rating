@@ -1,21 +1,19 @@
-// Components
+// ======== components =========
 const addMovie = document.querySelector("#form");
 const title = document.querySelector("#title");
 const rating = document.querySelector("#rating");
 const tableContent = document.querySelector('.table-content');
+const btnClear = document.querySelector("#btn-clear");
 
-// Variables
-let movies = [], id = 0, remove
-
-// Functions
-let loadMovies = () => {
-    const movieRating = (id,title, rate, deleteId) =>`
+// ====== functions to create table row ======
+let loadMovies = (movies) => {
+    const movieRating = (id,title, rate, remove) =>`
     <tr>
         <td class="text-center">${id}</td>
         <td class="text-center">${title}</td>
         <td class="text-center">${rate}</td>
         <td class="text-right">
-            <button class="btn btn-danger" onClick="removeId(${deleteId})">Delete</button>
+            <button class="btn btn-danger" onClick="removeId(${remove})">Delete</button>
         </td>
     </tr>
     `
@@ -25,13 +23,26 @@ let loadMovies = () => {
     })
 }
 
-let removeId = (remove) => {
-    const remains = movies.filter((movie) => movie.remove !== remove);
-    movies = remains;
-    loadMovies()
+let movies = [], id = 0;
+
+const movieFromLS = localStorage.getItem('movie');
+// console.log(movieFromLS)
+if(movieFromLS) {
+    const parseMovies = JSON.parse(movieFromLS)
+    movies = parseMovies
+    id = movies.length;
+    loadMovies(movies);
 }
 
-// event listener that submit the movies to the table
+
+
+let removeId = (remove) => {
+    const remains = movies.filter((movie) => movie.remove !== remove);
+    localStorage.setItem('movie',JSON.stringify(remains));
+    loadMovies(remains)
+}
+
+// =======  event listener that submit the movies to the table =========
 addMovie.addEventListener("submit", e => {
     e.preventDefault();
     id++
@@ -39,9 +50,17 @@ addMovie.addEventListener("submit", e => {
         id: id,
         title: title.value,
         rating: rating.value,
-        // remove: remove.value
+        remove: id
     });
-
-    loadMovies();
+    loadMovies(movies);
+    localStorage.setItem('movie', JSON.stringify(movies))
     title.value = rating.value = ''
 });
+
+// ==== localstorage clear =======
+btnClear.addEventListener('click', () => {
+    localStorage.clear()
+
+    localStorage.setItem('movie',JSON.stringify(movieFromLS));
+    loadMovies(movies);
+})

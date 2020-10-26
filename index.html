@@ -18,15 +18,16 @@
             <h1 class="header text-center">MY FAVOURITE MOVIES</h1>
             <form id="form" class=" pt-2">
                 <div class="form-row mt-4">
-                    <div class="col-lg-5 input-holder">
+                    <div class="col-lg-6 input-holder">
                         <input type="text" id="title" class="form-control" placeholder="Movie Title">
                     </div>
-                    <div class="col-lg-5 input-holder">
+                    <div class="col-lg-6 input-holder">
                         <input type="number" min="0" max="10" id="rating" class="form-control"
                             placeholder="Rate the movie from 0 to 10">
                     </div>
-                    <div class="col-auto btn-holder">
-                        <button type="submit" class="btn bg-dark text-light">Add Movie</button>
+                    <div class="col-12 text-center pt-lg-4 btn-holder">
+                        <button type="submit" class="btn bg-dark text-light mr-lg-5">Add Movie</button>
+                        <button type="button" class="btn bg-danger text-light" id="btn-clear">Clear All</button>
                     </div>
                 </div>
             </form>
