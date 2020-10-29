@@ -66,6 +66,6 @@ addMovie.addEventListener("submit", e => {
 // ==== localstorage clear =======
 btnClear.addEventListener('click', () => {
     localStorage.clear()
-    const fetchMovie = loadMovies(movies);
-    localStorage.setItem('movie',JSON.stringify(fetchMovie));
+    // const fetchMovie = loadMovies(movies);
+    // localStorage.setItem('movie',JSON.stringify(fetchMovie));
 })
