@@ -39,28 +39,33 @@ if(movieFromLS) {
 let removeId = (remove) => {
     const remains = movies.filter((movie) => movie.remove !== remove);
     localStorage.setItem('movie',JSON.stringify(remains));
+    // console.log(remove)
     loadMovies(remains)
 }
 
 // =======  event listener that submit the movies to the table =========
 addMovie.addEventListener("submit", e => {
-    e.preventDefault();
-    id++
-    movies.push({
-        id: id,
-        title: title.value,
-        rating: rating.value,
-        remove: id
-    });
-    loadMovies(movies);
-    localStorage.setItem('movie', JSON.stringify(movies))
-    title.value = rating.value = ''
+    if (title.value.length === 0 || rating.value.length === 0 ) {
+        alert('Opps!!!, movie title or rating field is empty')
+    } else {
+        e.preventDefault();
+        id++
+        movies.push({
+            id: id,
+            title: title.value,
+            rating: rating.value,
+            remove: id
+        });
+        loadMovies(movies);
+        localStorage.setItem('movie', JSON.stringify(movies))
+        title.value = rating.value = ''
+    }
+    
 });
 
 // ==== localstorage clear =======
 btnClear.addEventListener('click', () => {
     localStorage.clear()
-
-    localStorage.setItem('movie',JSON.stringify(movieFromLS));
-    loadMovies(movies);
+    const fetchMovie = loadMovies(movies);
+    localStorage.setItem('movie',JSON.stringify(fetchMovie));
 })
