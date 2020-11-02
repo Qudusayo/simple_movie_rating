@@ -1,14 +1,15 @@
 // ======== components =========
 const storageName = 'movies';
-const noMoviesMsg = "No Movies Now";
-let tableContainer = document.querySelector('.table-container');
-let allMovies = [];
+const noMoviesMsg = "Ooops! you have an empty Movies list Now, try adding some movies";
+var tableContainer = document.querySelector('.table-container');
+var allMovies = [];
 
 
 window.addEventListener('load', () => {
     init();
     addSubmitEvent();
 });
+
 let init = () => {
     let hasMovies = localStorage.getItem(storageName);
     if( hasMovies ){
@@ -23,8 +24,13 @@ let init = () => {
 let addSubmitEvent = () => {
     let form = document.querySelector('#form');
     form.addEventListener('submit', e => {
-        e.preventDefault();
-        saveMovies(e.currentTarget);
+        if (title.value.length === 0 || rating.value.length === 0 ) {
+            alert('Opps!!!, movie title or rating field is empty')
+        } else {
+            e.preventDefault();
+            saveMovies(e.currentTarget);
+            title.value = rating.value = ''
+        }
     })
 }
 
@@ -34,9 +40,10 @@ let getMovies = () => {
 
 let doNoMovies = () => {
     tableContainer.innerHTML = noMoviesMsg;
+    // noMoviesMsg.classList.add = ('displayErrorMessage')
 }
 
-let saveMovies = () => {
+let saveMovies = (form) => {
     let title = form.elements.namedItem('movie-title').value;
     let rating = form.elements.namedItem('movie-rating').value;
     if(!title.trim() || !rating) return;
@@ -47,8 +54,6 @@ let saveMovies = () => {
         rating,
     };
     allMovies.push(movieData);
-    
-    title = rating = ''
     updateLs();
     renderMovies(allMovies);
 }
@@ -74,10 +79,10 @@ let renderMovies = () => {
         let table = `<table class="table">
         <thead class="thead-light">
             <tr>
-                <td scope="col-3" class="text-center">S/N</td>
-                <td scope="col-3" class="text-center">MOVIE TITLE</td>
-                <td scope="col-3" class="text-center">MOVIE RATING</td>
-                <td scope="col-3" class="text-center">ACTIONS</td>
+                <th scope="col-3" class="text-center">S/N</th>
+                <th scope="col-3" class="text-center">MOVIE TITLE</th>
+                <th scope="col-3" class="text-center">MOVIE RATING</th>
+                <th scope="col-3" class="text-center">ACTIONS</th>
             </tr>
         </thead>
         <tbody>
@@ -122,7 +127,7 @@ let addRemoveEvent = () => {
     deletebtns.forEach(deletebtn => {
         deletebtn.addEventListener('click', e => {
             removeMovie(e.currentTarget.dataset.id);
-        }) 
+        })
     });
 }
 

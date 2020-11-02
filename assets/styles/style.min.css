@@ -1,5 +1,11 @@
 *{font-family:"Balsamiq Sans",cursive}table tbody{-webkit-transition:height 40s linear;transition:height 40s linear}
-
+.displayErrorMessage{
+ font-weight: bolder;
+ color: red;
+}
+h1.header{
+  font-weight: bolder;
+}
 /* ============ media queries for differents device screen ============ */
 @media screen and (max-width: 299px) and (min-width: 200px) {
   div div > h1.header{
@@ -41,5 +47,12 @@
   }
   input{
     padding: 20px !important;
+  }
+}
+
+@media screen and (max-width: 500px) and (min-width: 300px) {
+  h1.header{
+    font-size: 1.3em;
+    font-weight: bolder;
   }
 }
