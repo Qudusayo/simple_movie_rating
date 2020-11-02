@@ -1,7 +1,7 @@
 *{font-family:"Balsamiq Sans",cursive}table tbody{-webkit-transition:height 40s linear;transition:height 40s linear}
-.displayErrorMessage{
- font-weight: bolder;
- color: red;
+.table-container{
+  /* font-weight: bolder;
+  font-size: 1.8em; */
 }
 h1.header{
   font-weight: bolder;
@@ -26,6 +26,7 @@ h1.header{
   }
   div.table-container{
     overflow-x: scroll;
+    font-size: 0.8em;
   }
   input{
     padding: 20px !important;
@@ -54,5 +55,8 @@ h1.header{
   h1.header{
     font-size: 1.3em;
     font-weight: bolder;
+  }
+  .table-container{
+    font-size: 1em;
   }
 }

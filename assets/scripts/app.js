@@ -10,6 +10,7 @@ window.addEventListener('load', () => {
     addSubmitEvent();
 });
 
+// initialization of localStorage and setting up of page display 
 let init = () => {
     let hasMovies = localStorage.getItem(storageName);
     if( hasMovies ){
@@ -25,7 +26,7 @@ let addSubmitEvent = () => {
     let form = document.querySelector('#form');
     form.addEventListener('submit', e => {
         if (title.value.length === 0 || rating.value.length === 0 ) {
-            alert('Opps!!!, movie title or rating field is empty')
+            alert('Oops!!!, movie title or rating field is empty')
         } else {
             e.preventDefault();
             saveMovies(e.currentTarget);
@@ -40,7 +41,6 @@ let getMovies = () => {
 
 let doNoMovies = () => {
     tableContainer.innerHTML = noMoviesMsg;
-    // noMoviesMsg.classList.add = ('displayErrorMessage')
 }
 
 let saveMovies = (form) => {
@@ -56,21 +56,11 @@ let saveMovies = (form) => {
     allMovies.push(movieData);
     updateLs();
     renderMovies(allMovies);
+    console.log(renderMovies(allMovies))
 }
 
 let updateLs = () => {
     localStorage.setItem(storageName, JSON.stringify(allMovies));
-}
-
-let createHeaderRow = () => {
-    let headerContent = ['S/N', 'MOVIE TITLE', 'MOVIE RATING', 'ACTIONS'];
-    let tr = document.createElement('tr');
-    for(let i = 0; i < headerContent.length; i++){
-        let td = document.createElement('td');
-        td.innerHTML = headerContent[i] ;
-        tr.appendChild(td);
-    }
-    return tr;
 }
 
 let renderMovies = () => {
@@ -89,7 +79,7 @@ let renderMovies = () => {
         `;
         movies.forEach((movie, idx) => {
            table+=`<tr>
-            <td scope="col-3" class="text-center">${idx}</td>
+            <td scope="col-3" class="text-center">${idx + 1}</td>
             <td scope="col-3" class="text-center">${movie.title}</td>
             <td scope="col-3" class="text-center">${movie.rating}</td>
             <td scope="col-3" class="text-center">
@@ -103,12 +93,14 @@ let renderMovies = () => {
         doNoMovies();
     }
 }
+
 let getLastId = () => {
     let movies = allMovies;
     let moviesLen = movies.length;
     let r = moviesLen ? movies[moviesLen - 1]['id'] : 1;
     return r;
 }
+
 let removeMovie = (id) => {
     if(id){
         allMovies.forEach((movie, idx) => {
@@ -122,6 +114,7 @@ let removeMovie = (id) => {
     renderMovies();
     updateLs();
 }
+
 let addRemoveEvent = () => {
     let deletebtns = [... document.querySelectorAll('#btn-clear')];
     deletebtns.forEach(deletebtn => {
