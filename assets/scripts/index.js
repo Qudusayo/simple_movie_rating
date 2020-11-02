@@ -1,15 +1,13 @@
-// ======== components =========
+const d = document;
 const storageName = 'movies';
 const noMoviesMsg = "No Movies Now";
-let tableContainer = document.querySelector('.table-container');
+let movieCont = d.querySelector('.movies-list');
 let allMovies = [];
-
-
 window.addEventListener('load', () => {
     init();
     addSubmitEvent();
 });
-let init = () => {
+function init(){
     let hasMovies = localStorage.getItem(storageName);
     if( hasMovies ){
         allMovies = JSON.parse(hasMovies);
@@ -19,24 +17,20 @@ let init = () => {
         doNoMovies();
     }
 }
-
-let addSubmitEvent = () => {
-    let form = document.querySelector('#form');
-    form.addEventListener('submit', e => {
-        e.preventDefault();
-        saveMovies(e.currentTarget);
+function addSubmitEvent(){
+    let form = d.querySelector('.movie-form');
+    form.addEventListener('submit', (event) => {
+        event.preventDefault();
+        saveMovies(event.currentTarget);
     })
 }
-
-let getMovies = () => {
+function getMovies(){
     return JSON.parse(localStorage.getItem(storageName));
 }
-
-let doNoMovies = () => {
-    tableContainer.innerHTML = noMoviesMsg;
+function doNoMovies(){
+    movieCont.innerHTML = noMoviesMsg;
 }
-
-let saveMovies = () => {
+function saveMovies(form){
     let title = form.elements.namedItem('movie-title').value;
     let rating = form.elements.namedItem('movie-rating').value;
     if(!title.trim() || !rating) return;
@@ -47,17 +41,13 @@ let saveMovies = () => {
         rating,
     };
     allMovies.push(movieData);
-    
-    title = rating = ''
     updateLs();
     renderMovies(allMovies);
 }
-
-let updateLs = () => {
+function updateLs(){
     localStorage.setItem(storageName, JSON.stringify(allMovies));
 }
-
-let createHeaderRow = () => {
+function createHeaderRow(){
     let headerContent = ['S/N', 'MOVIE TITLE', 'MOVIE RATING', 'ACTIONS'];
     let tr = document.createElement('tr');
     for(let i = 0; i < headerContent.length; i++){
@@ -68,43 +58,43 @@ let createHeaderRow = () => {
     return tr;
 }
 
-let renderMovies = () => {
+function renderMovies(){
     let movies = allMovies;
     if(movies.length){
-        let table = `<table class="table">
-        <thead class="thead-light">
+        let table = `<table>
+        <thead>
             <tr>
-                <td scope="col-3" class="text-center">S/N</td>
-                <td scope="col-3" class="text-center">MOVIE TITLE</td>
-                <td scope="col-3" class="text-center">MOVIE RATING</td>
-                <td scope="col-3" class="text-center">ACTIONS</td>
+                <td>S/N</td>
+                <td>MOVIE TITLE</td>
+                <td>MOVIE RATING</td>
+                <td>ACTIONS</td>
             </tr>
         </thead>
         <tbody>
         `;
         movies.forEach((movie, idx) => {
            table+=`<tr>
-            <td scope="col-3" class="text-center">${idx}</td>
-            <td scope="col-3" class="text-center">${movie.title}</td>
-            <td scope="col-3" class="text-center">${movie.rating}</td>
-            <td scope="col-3" class="text-center">
-                <button id="btn-clear" class="btn bg-danger text-light" data-id="${movie.id}">delete</button>
+            <td>${idx}</td>
+            <td>${movie.title}</td>
+            <td>${movie.rating}</td>
+            <td>
+                <button class="delete" data-id="${movie.id}">delete</button>
             </td>
             </tr>`;
         });
-        tableContainer.innerHTML = table;
+        movieCont.innerHTML = table;
         addRemoveEvent();
     } else {
         doNoMovies();
     }
 }
-let getLastId = () => {
+function getLastId(){
     let movies = allMovies;
     let moviesLen = movies.length;
     let r = moviesLen ? movies[moviesLen - 1]['id'] : 1;
     return r;
 }
-let removeMovie = (id) => {
+function removeMovie(id){
     if(id){
         allMovies.forEach((movie, idx) => {
             if(movie.id == id){
@@ -117,12 +107,11 @@ let removeMovie = (id) => {
     renderMovies();
     updateLs();
 }
-let addRemoveEvent = () => {
-    let deletebtns = [... document.querySelectorAll('#btn-clear')];
+function addRemoveEvent(){
+    let deletebtns = [... d.querySelectorAll('.delete')];
     deletebtns.forEach(deletebtn => {
-        deletebtn.addEventListener('click', e => {
-            removeMovie(e.currentTarget.dataset.id);
+        deletebtn.addEventListener('click', (event) => {
+            removeMovie(event.currentTarget.dataset.id);
         }) 
     });
 }
-
