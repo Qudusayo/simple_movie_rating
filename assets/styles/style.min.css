@@ -1,8 +1,7 @@
 *{font-family:"Balsamiq Sans",cursive}table tbody{-webkit-transition:height 40s linear;transition:height 40s linear}
-.table-container{
-  /* font-weight: bolder;
-  font-size: 1.8em; */
-}
+/* .empty-message{
+  color: red;
+} */
 h1.header{
   font-weight: bolder;
 }

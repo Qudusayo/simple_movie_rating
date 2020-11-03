@@ -1,4 +1,4 @@
-// ======== components =========
+// ======== declarartion and assignment of variables =========
 const storageName = 'movies';
 const noMoviesMsg = "Ooops! you have an empty Movies list Now, try adding some movies";
 var tableContainer = document.querySelector('.table-container');
@@ -40,6 +40,7 @@ let getMovies = () => {
 }
 
 let doNoMovies = () => {
+    // noMoviesMsg.addClass = ('empty-message')
     tableContainer.innerHTML = noMoviesMsg;
 }
 
