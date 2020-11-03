@@ -1,15 +1,11 @@
-*{font-family:"Balsamiq Sans",cursive}table tbody{-webkit-transition:height 40s linear;transition:height 40s linear}
-/* .empty-message{
-  color: red;
-} */
-h1.header{
-  font-weight: bolder;
-}
+*{font-family:"Balsamiq Sans",cursive}
+/* table tbody{-webkit-transition:height 40s linear;transition:height 40s linear} */
+div > div, table > thead {background: #2C2C2C !important; color: #0F64D2; border-radius: 0px 0px 10px 10px !important;}
+h1.header{font-weight: bolder;}tr > td {background: #1A1A1A; cursor: pointer;color: #fff;}
+
 /* ============ media queries for differents device screen ============ */
 @media screen and (max-width: 299px) and (min-width: 200px) {
-  div div > h1.header{
-    font-size: 1.3em;
-  }
+  div div > h1.header{font-size: 1.3em;}
   div div > form > div.form-row{
     display: grid;
     grid-template-columns: 100%;
@@ -20,16 +16,14 @@ h1.header{
     grid-template-columns: 50% 40%;
     column-gap: 20px;
   }
-  div div > form > div.form-row > div.btn-holder > button {
-    font-size: 0.7em !important;
-  }
+  div div > form > div.form-row > div.btn-holder > button {font-size: 0.7em !important;}
   div.table-container{
     overflow-x: scroll;
     font-size: 0.8em;
+    padding: 0px 10px !important;
   }
-  input{
-    padding: 20px !important;
-  }
+  input{padding: 20px !important;}
+  body > div {padding: 0px !important;}div > div {border-radius: 0px !important;}
 }
 @media screen and (max-width: 800px) and (min-width: 300px) {
   div div > form > div.form-row{
@@ -42,20 +36,11 @@ h1.header{
     grid-template-columns: 50% 40%;
     column-gap: 30px;
   }
-  div.table-container{
-    overflow-x: scroll;
-  }
-  input{
-    padding: 20px !important;
-  }
+  div.table-container{overflow-x: scroll;}
+  input{padding: 20px !important;}
 }
 
 @media screen and (max-width: 500px) and (min-width: 300px) {
-  h1.header{
-    font-size: 1.3em;
-    font-weight: bolder;
-  }
-  .table-container{
-    font-size: 1em;
-  }
+  h1.header{font-size: 1.3em;font-weight: bolder;}.table-container{font-size: 1em;}
+  body > div {padding: 0px !important;}div > div {border-radius: 0px !important;}
 }

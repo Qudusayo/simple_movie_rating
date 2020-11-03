@@ -1,6 +1,7 @@
 // ======== declarartion and assignment of variables =========
 const storageName = 'movies';
 const noMoviesMsg = "Ooops! you have an empty Movies list Now, try adding some movies";
+// const empty = document.querySelector('#empty')
 var tableContainer = document.querySelector('.table-container');
 var allMovies = [];
 
@@ -40,7 +41,6 @@ let getMovies = () => {
 }
 
 let doNoMovies = () => {
-    // noMoviesMsg.addClass = ('empty-message')
     tableContainer.innerHTML = noMoviesMsg;
 }
 
@@ -57,7 +57,6 @@ let saveMovies = (form) => {
     allMovies.push(movieData);
     updateLs();
     renderMovies(allMovies);
-    console.log(renderMovies(allMovies))
 }
 
 let updateLs = () => {
@@ -68,7 +67,7 @@ let renderMovies = () => {
     let movies = allMovies;
     if(movies.length){
         let table = `<table class="table">
-        <thead class="thead-light">
+        <thead class="thead">
             <tr>
                 <th scope="col-3" class="text-center">S/N</th>
                 <th scope="col-3" class="text-center">MOVIE TITLE</th>
@@ -76,7 +75,7 @@ let renderMovies = () => {
                 <th scope="col-3" class="text-center">ACTIONS</th>
             </tr>
         </thead>
-        <tbody>
+        <tbody id="tbody">
         `;
         movies.forEach((movie, idx) => {
            table+=`<tr>
@@ -100,7 +99,7 @@ let getLastId = () => {
     let moviesLen = movies.length;
     let r = moviesLen ? movies[moviesLen - 1]['id'] : 1;
     return r;
-}
+} 
 
 let removeMovie = (id) => {
     if(id){
